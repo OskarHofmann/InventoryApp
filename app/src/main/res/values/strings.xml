@@ -1,4 +1,12 @@
 <resources>
+    <!-- name of the app -->
     <string name="app_name">Inventory App</string>
+
+    <!-- shown label for the catalog -->
     <string name="catalog_label">Book Inventory</string>
+
+    <!-- message for an empty inventory -->
+    <string name="empty_inventory">The inventory is empty...</string>
+    <string name="add_some_books">Get started by adding some books!</string>
+
 </resources>

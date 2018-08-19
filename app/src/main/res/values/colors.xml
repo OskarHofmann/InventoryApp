@@ -3,4 +3,8 @@
     <color name="colorPrimary">#407FB7</color>
     <color name="colorPrimaryDark">#00549F</color>
     <color name="colorAccent">#407FB7</color>
+    <color name="list_item_book_name_text_color">#222255</color>
+    <color name="list_item_book_details_text_color">#555555</color>
+    <color name="list_view_divider_color">#DDDDDD</color>
+    <color name="empty_view_instructions_bottom_text_color">#A2AAB0</color>
 </resources>

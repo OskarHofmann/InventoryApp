@@ -12,14 +12,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#222255"
+        android:textColor="@color/list_item_book_name_text_color"
         tools:text="Die Leiden des jungen Werthers" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="6dp">
+        android:paddingTop="@dimen/list_item_details_padding_top">
 
         <TextView
             android:id="@+id/book_price"
@@ -28,18 +28,18 @@
             android:layout_weight="0.2"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#555555"
+            android:textColor="@color/list_item_book_details_text_color"
             tools:text="12.99 €" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.7"
             android:fontFamily="sans-serif"
             android:gravity="right"
             android:text="Quantity:"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#555555" />
+            android:textColor="@color/list_item_book_details_text_color" />
 
         <TextView
             android:id="@+id/book_quantity"
@@ -48,9 +48,9 @@
             android:layout_weight="0.2"
             android:fontFamily="sans-serif"
             android:gravity="right"
-            android:paddingRight="16dp"
+            android:paddingRight="@dimen/list_item_quantity_padding_right"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#555555"
+            android:textColor="@color/list_item_book_details_text_color"
             tools:text="5000" />
 
     </LinearLayout>

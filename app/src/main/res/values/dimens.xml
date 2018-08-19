@@ -3,6 +3,11 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Common margin value used throughout the app -->
-    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_margin">12dp</dimen>
+    <dimen name="list_item_quantity_padding_right">16dp</dimen>
+    <dimen name="list_item_details_padding_top">4dp</dimen>
+    <dimen name="list_view_divider_height">1dp</dimen>
+    <dimen name="empty_view_instructions_top_text_padding">16dp</dimen>
+    <dimen name="empty_view_instructions_bottom_text_padding">8dp</dimen>
 </resources>
 
