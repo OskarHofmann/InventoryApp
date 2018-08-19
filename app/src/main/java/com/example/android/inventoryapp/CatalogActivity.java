@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.android.inventoryapp.data.BookContract.BookEntry;
 import com.example.android.inventoryapp.data.BookDbHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class CatalogActivity extends AppCompatActivity {
 
     private BookDbHelper mDbHelper;
 
@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         mDbHelper = new BookDbHelper(this);
 
-        insertData();
 
         Cursor dbEntries = queryData();
 
@@ -33,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Inserts (dummy) data entry into the DB
      */
-    private void insertData() {
-
-        //Get a DB to write into
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    private void insertDummyData() {
 
         //Dummy Data
         String bookName = "The Bible";
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhone);
 
         //write book defined in values into database
-        db.insert(BookEntry.TABLE_NAME, null, values);
+        getContentResolver().insert(BookEntry.CONTENT_URI, values);
     }
 
     /**
