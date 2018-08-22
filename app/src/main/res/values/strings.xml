@@ -9,4 +9,9 @@
     <string name="empty_inventory">The inventory is empty...</string>
     <string name="add_some_books">Get started by adding some books!</string>
 
+    <!-- Label for overflow menu option that inserts dummy data into the app [CHAR LIMIT=20] -->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <!-- Label for overflow menu option that deletes all books in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Books</string>
+
 </resources>
