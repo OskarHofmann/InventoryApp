@@ -1,0 +1,93 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="12dp"
+    android:padding="@dimen/activity_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editor_book_name"
+            style="@style/EditorFieldStyle"
+            android:layout_width="match_parent"
+            android:hint="@string/hint_book_name"
+            android:inputType="textCapWords" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editor_price"
+                style="@style/EditorFieldStyle"
+                android:layout_weight="1"
+                android:hint="@string/hint_price"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/editor_currency"
+                style="@style/EditorFieldStyle"
+                android:layout_weight="2"
+                tools:text="€" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/category_in_stock" />
+
+            <EditText
+                android:id="@+id/editor_quantity"
+                style="@style/EditorFieldStyle"
+                android:layout_weight="2"
+                android:hint="@string/hint_quantity"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/category_supplier" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editor_supplier_name"
+                    style="@style/EditorFieldStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/hint_supplier_name"
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/editor_supplier_phone"
+                    style="@style/EditorFieldStyle"
+                    android:layout_width="match_parent"
+                    android:hint="@string/hint_supplier_phone"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

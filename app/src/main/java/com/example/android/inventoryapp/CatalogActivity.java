@@ -18,7 +18,6 @@ import com.example.android.inventoryapp.data.BookDbHelper;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private BookDbHelper mDbHelper;
     private static final int BOOK_LOADER = 0;
     private BookCursorAdapter mAdapter;
 
@@ -105,11 +104,13 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         getContentResolver().insert(BookEntry.CONTENT_URI, values);
     }
 
+    /* */
+
     /**
      * Reads out the whole DB
      *
      * @return Cursor with the DB
-     */
+     *//*
     private Cursor queryData() {
 
         //Get a DB to read from
@@ -137,7 +138,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         return cursor;
 
-    }
+    }*/
 
 
     /*private void visualizeCursor(Cursor cursor) {
