@@ -23,4 +23,12 @@
     <string name="hint_supplier_name">Supplier Name</string>
     <string name="hint_supplier_phone">Supplier Phone</string>
 
+    <string name="plus">+</string>
+    <string name="minus">—</string>
+
+    <!-- Sale Button -->
+    <string name="sale">Sale</string>
+    <string name="editor_activity_title_new_book">Add a Book</string>
+    <string name="editor_activity_title_edit_book">Edit Book</string>
+
 </resources>

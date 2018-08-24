@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/book_name"
@@ -18,8 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/list_item_details_padding_top">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/book_price"
@@ -29,15 +27,16 @@
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/list_item_book_details_text_color"
-            tools:text="12.99 €" />
+            android:gravity="right"
+            tools:text="1111.99 €" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.4"
             android:fontFamily="sans-serif"
             android:gravity="right"
-            android:text="Quantity:"
+            android:text="@string/category_in_stock"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/list_item_book_details_text_color" />
 
@@ -52,6 +51,12 @@
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/list_item_book_details_text_color"
             tools:text="5000" />
+
+        <Button
+            android:id="@+id/sale_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sale" />
 
     </LinearLayout>
 

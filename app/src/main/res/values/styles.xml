@@ -12,7 +12,8 @@
     <style name="EditorFieldStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:paddingTop">@dimen/editor_padding_top</item>
+        <item name="android:paddingTop">@dimen/editor_padding</item>
+        <item name="android:paddingBottom">@dimen/editor_padding</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>
@@ -22,7 +23,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:paddingTop">@dimen/editor_padding_top</item>
+        <item name="android:paddingTop">@dimen/editor_padding</item>
+        <item name="android:paddingBottom">@dimen/editor_padding</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>

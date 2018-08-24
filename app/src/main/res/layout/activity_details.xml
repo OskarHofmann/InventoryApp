@@ -2,26 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    android:padding="@dimen/activity_margin">
+    android:layout_margin="@dimen/details_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- book name -->
         <TextView
             android:id="@+id/details_book_name"
             style="@style/EditorFieldStyle"
             android:layout_width="match_parent"
+            android:textStyle="bold"
             tools:text="The DaVinci Code" />
 
+        <!-- book price -->
         <TextView
             android:id="@+id/details_price"
             style="@style/EditorFieldStyle"
             android:layout_width="wrap_content"
             tools:text="12.99 €" />
 
+        <!-- books in stock -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,11 +37,26 @@
             <TextView
                 android:id="@+id/details_quantity"
                 style="@style/EditorFieldStyle"
-                android:layout_weight="2"
+                android:layout_weight="1.2"
                 tools:text="120" />
+
+            <Button
+                android:id="@+id/plus_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/plus" />
+
+            <Button
+                android:id="@+id/minus_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/minus" />
 
         </LinearLayout>
 
+        <!-- supplier information -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,19 +72,17 @@
                 android:layout_weight="2"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editor_supplier_name"
+                <TextView
+                    android:id="@+id/details_supplier_name"
                     style="@style/EditorFieldStyle"
                     android:layout_width="match_parent"
-                    android:hint="@string/hint_supplier_name"
-                    android:inputType="textCapWords" />
+                    tools:text="Crazy Books Inc" />
 
-                <EditText
-                    android:id="@+id/editor_supplier_phone"
+                <TextView
+                    android:id="@+id/details_supplier_phone"
                     style="@style/EditorFieldStyle"
                     android:layout_width="match_parent"
-                    android:hint="@string/hint_supplier_phone"
-                    android:inputType="phone" />
+                    tools:text="+49 241 666 666" />
 
             </LinearLayout>
 
