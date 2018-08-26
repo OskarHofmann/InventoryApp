@@ -24,18 +24,14 @@ import butterknife.ButterKnife;
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int BOOK_LOADER = 0;
-    @BindView(R.id.editor_book_name)
-    EditText bookNameEditText;
-    @BindView(R.id.editor_price)
-    EditText bookPriceEditText;
-    @BindView(R.id.editor_currency)
-    TextView currencyTextView;
-    @BindView(R.id.editor_quantity)
-    EditText quantityEditText;
-    @BindView(R.id.editor_supplier_name)
-    EditText supplierNameEditText;
-    @BindView(R.id.editor_supplier_phone)
-    EditText supplierPhoneEditText;
+
+    @BindView(R.id.editor_book_name) EditText bookNameEditText;
+    @BindView(R.id.editor_price) EditText bookPriceEditText;
+    @BindView(R.id.editor_currency) TextView currencyTextView;
+    @BindView(R.id.editor_quantity) EditText quantityEditText;
+    @BindView(R.id.editor_supplier_name) EditText supplierNameEditText;
+    @BindView(R.id.editor_supplier_phone) EditText supplierPhoneEditText;
+
     private Uri mBookUri;
 
     /**
@@ -113,7 +109,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             bookNameEditText.setText(bookName);
             bookPriceEditText.setText(String.format(Locale.getDefault(), "%.2f", bookPrice));
-            quantityEditText.setText(bookQuantity);
+            quantityEditText.setText(""+ bookQuantity);
             supplierNameEditText.setText(supplierName);
             supplierPhoneEditText.setText(supplierPhone);
 

@@ -31,4 +31,9 @@
     <string name="editor_activity_title_new_book">Add a Book</string>
     <string name="editor_activity_title_edit_book">Edit Book</string>
 
+    <!-- Delete confirmation dialog -->
+    <string name="delete_all_dialog_msg">Delete all books?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

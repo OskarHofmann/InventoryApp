@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <TextView
@@ -17,6 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal">
 
         <TextView
@@ -25,9 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:fontFamily="sans-serif"
+            android:gravity="right"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/list_item_book_details_text_color"
-            android:gravity="right"
             tools:text="1111.99 €" />
 
         <TextView
