@@ -5,14 +5,18 @@
     <!-- shown label for the catalog -->
     <string name="catalog_label">Book Inventory</string>
 
+    <!-- shown label for the details page -->
+    <string name="details_label">Book Details</string>
+
     <!-- message for an empty inventory -->
     <string name="empty_inventory">The inventory is empty...</string>
     <string name="add_some_books">Get started by adding some books!</string>
 
-    <!-- Label for overflow menu option that inserts dummy data into the app [CHAR LIMIT=20] -->
+    <!-- menu buttons [CHAR LIMIT=20]-->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
-    <!-- Label for overflow menu option that deletes all books in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Books</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
 
     <!-- Editor Activity -->
     <string name="hint_book_name">Book Name</string>
@@ -33,7 +37,27 @@
 
     <!-- Delete confirmation dialog -->
     <string name="delete_all_dialog_msg">Delete all books?</string>
+    <string name="delete_one_dialog_msg">Delete this book?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+
+    <!-- Unsaved changes dialog -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+
+
+    <!-- toast messages-->
+    <string name="delete_all_successful">All books deleted!</string>
+    <string name="delete_all_not_successful">No books to delete or error deleting books!</string>
+    <string name="delete_book_successful">Book deleted!</string>
+    <string name="delete_book_not_successful">Error with deleting book!</string>
+    <string name="no_valid_book_name">Book requires a valid name!</string>
+    <string name="no_valid_supplier_name">Supplier requires a valid name!</string>
+    <string name="insert_book_failed">Error with saving book!</string>
+    <string name="insert_book_successful">Book saved!</string>
+    <string name="update_book_failed">Error with updating book!</string>
+    <string name="update_book_successful">Book updated!</string>
+
 
 </resources>

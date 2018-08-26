@@ -39,14 +39,14 @@ public class BookCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, final Cursor cursor) {
+    public void bindView(View view, Context context, Cursor cursor) {
         //Get the ViewHolder from the given view
         ViewHolder holder = (ViewHolder) view.getTag();
 
         // read the book name, price and quantity from the given cursor
         String bookName = cursor.getString(cursor.getColumnIndexOrThrow(BookEntry.COLUMN_PRODUCT_NAME));
         float price = cursor.getFloat(cursor.getColumnIndexOrThrow(BookEntry.COLUMN_PRICE));
-        final int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BookEntry.COLUMN_QUANTITY));
+        int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BookEntry.COLUMN_QUANTITY));
 
         //Get the format for the user's local currency
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
@@ -63,31 +63,41 @@ public class BookCursorAdapter extends CursorAdapter {
             holder.quantityView.setTextColor(context.getResources().getColor(R.color.list_item_book_details_text_color));
         }
 
-        //Define what happens when the sale button is clicked
+
+        // Pass the Uri of the current book as a tag to the "Sale" button
+        // and define what happens when the button is clicked
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow(BookEntry._ID));
+        Uri bookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
+
+        holder.saleButton.setTag(bookUri);
         holder.saleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //If the quantity is 0, nothing should happen
-                if (quantity > 1) {
-                    //find out the id of the book the current list item is for and create an Uri to that book
-                    int id = cursor.getInt(cursor.getColumnIndexOrThrow(BookEntry._ID));
-                    Uri bookUri = ContentUris.withAppendedId(BookEntry.CONTENT_URI, id);
+                //Get the quantity of the current book
+                Uri currentBookUri = (Uri) v.getTag();
+                Cursor c = v.getContext().getContentResolver().query(
+                        currentBookUri,
+                        new String[]{BookEntry.COLUMN_QUANTITY},
+                        null,
+                        null,
+                        null);
+                c.moveToFirst();
+                int currentQuantity = c.getInt(c.getColumnIndexOrThrow(BookEntry.COLUMN_QUANTITY));
 
+                if (currentQuantity > 0) {
                     //Create ContentValues with the reduced quantity
                     ContentValues values = new ContentValues();
-                    values.put(BookEntry.COLUMN_QUANTITY, quantity-1);
+                    values.put(BookEntry.COLUMN_QUANTITY, currentQuantity - 1);
 
                     //Update the current book with the reduced quantity
                     v.getContext().getContentResolver().update(
-                            bookUri,
+                            currentBookUri,
                             values,
                             null,
-                            null
-                    );
+                            null);
                 }
             }
         });
-
     }
 
     static class ViewHolder {

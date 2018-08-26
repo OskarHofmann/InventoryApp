@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.BookContract.BookEntry;
 
@@ -55,7 +56,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, DetailsActivity.class);
                 intent.setData(ContentUris.withAppendedId(BookEntry.CONTENT_URI, id));
                 startActivity(intent);
             }
@@ -128,6 +129,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         getContentResolver().insert(BookEntry.CONTENT_URI, values);
     }
 
+    /**
+     * shows a dialog to confirm the deletion of all books
+     */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
@@ -136,7 +140,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete all books.
-                getContentResolver().delete(BookEntry.CONTENT_URI, null, null);
+                deleteAllBooks();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -151,6 +155,21 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    /**
+     * delete all books and show a toast with the result
+     */
+    private void deleteAllBooks() {
+        //delete all books, pass "1" as a WhereClause to get a count of all deleted rows
+        int rowsDeleted = getContentResolver().delete(BookEntry.CONTENT_URI, "1", null);
+        if (rowsDeleted > 1) {
+            Toast.makeText(this, getString(R.string.delete_all_successful),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.delete_all_not_successful),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 
