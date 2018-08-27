@@ -53,7 +53,10 @@
     <string name="delete_book_successful">Book deleted!</string>
     <string name="delete_book_not_successful">Error with deleting book!</string>
     <string name="no_valid_book_name">Book requires a valid name!</string>
+    <string name="no_valid_price">Please enter a valid price!</string>
+    <string name="no_valid_quantity">Please enter a valid quantity!</string>
     <string name="no_valid_supplier_name">Supplier requires a valid name!</string>
+    <string name="no_valid_supplier_phone">Supplier requires a valid phone number!</string>
     <string name="insert_book_failed">Error with saving book!</string>
     <string name="insert_book_successful">Book saved!</string>
     <string name="update_book_failed">Error with updating book!</string>

@@ -171,8 +171,16 @@ public class BookProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public String getType(@NonNull Uri uri) {
-        return null;
+    public String getType(Uri uri) {
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return BookEntry.CONTENT_LIST_TYPE;
+            case BOOK_ID:
+                return BookEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
     }
 
 
@@ -213,7 +221,11 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Supplier requires a valid name");
         }
 
-        //Supplier phone is not required to insert a new item and can be any format
+        //Check if the supplier phone is valid, i.e. is not null or an empty string
+        String supplierPhone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE);
+        if (TextUtils.isEmpty(supplierPhone)) {
+            throw new IllegalArgumentException("Supplier requires a valid phone number");
+        }
 
 
         // Get readable database
@@ -276,6 +288,14 @@ public class BookProvider extends ContentProvider {
             String supplierName = values.getAsString(BookEntry.COLUMN_SUPPLIER_NAME);
             if (TextUtils.isEmpty(supplierName)) {
                 throw new IllegalArgumentException("Supplier requires a valid name");
+            }
+        }
+
+        //Check if the supplier phone is valid, i.e. is not null or an empty string
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER_PHONE)) {
+            String supplierPhone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE);
+            if (TextUtils.isEmpty(supplierPhone)) {
+                throw new IllegalArgumentException("Supplier requires a valid phone number");
             }
         }
 

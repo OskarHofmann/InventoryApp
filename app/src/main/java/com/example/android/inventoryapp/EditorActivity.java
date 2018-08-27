@@ -34,12 +34,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final int BOOK_LOADER = 0;
 
-    @BindView(R.id.editor_book_name) EditText bookNameEditText;
-    @BindView(R.id.editor_price) EditText bookPriceEditText;
-    @BindView(R.id.editor_currency) TextView currencyTextView;
-    @BindView(R.id.editor_quantity) EditText quantityEditText;
-    @BindView(R.id.editor_supplier_name) EditText supplierNameEditText;
-    @BindView(R.id.editor_supplier_phone) EditText supplierPhoneEditText;
+    @BindView(R.id.editor_book_name)
+    EditText bookNameEditText;
+    @BindView(R.id.editor_price)
+    EditText bookPriceEditText;
+    @BindView(R.id.editor_currency)
+    TextView currencyTextView;
+    @BindView(R.id.editor_quantity)
+    EditText quantityEditText;
+    @BindView(R.id.editor_supplier_name)
+    EditText supplierNameEditText;
+    @BindView(R.id.editor_supplier_phone)
+    EditText supplierPhoneEditText;
 
     private Uri mBookUri;
 
@@ -256,7 +262,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         //Check if all required fields are filled out and fill ContentValues accordingly
-        //Book and supplier name must be given and cannot be an empty String
+        //Book and supplier name and supplier phone must be given and cannot be an empty String
         if (TextUtils.isEmpty(bookNameText)) {
             Toast.makeText(this, getString(R.string.no_valid_book_name),
                     Toast.LENGTH_SHORT).show();
@@ -267,17 +273,38 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     Toast.LENGTH_SHORT).show();
             return false;
         }
+        if (TextUtils.isEmpty(supplierPhoneText)) {
+            Toast.makeText(this, getString(R.string.no_valid_supplier_phone),
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_PRODUCT_NAME, bookNameText.trim());
         values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierNameText.trim());
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneText.trim());
+
         // price and quantity are required but have default values
         // if we are updating a book, we just don't change the corresponding value if the field is empty
-        if (!TextUtils.isEmpty(bookPriceText))
-            values.put(BookEntry.COLUMN_PRICE, Float.parseFloat(bookPriceText.trim()));
-        if (!TextUtils.isEmpty(bookQuantityText))
-            values.put(BookEntry.COLUMN_QUANTITY, Integer.parseInt(bookQuantityText.trim()));
-        // for the supplier phone number, we would accept an empty string
-        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneText.trim());
+        if (!TextUtils.isEmpty(bookPriceText)) {
+            try {
+                float bookPriceFloat = Float.parseFloat(bookPriceText.trim());
+                values.put(BookEntry.COLUMN_PRICE, bookPriceFloat);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, getString(R.string.no_valid_price),
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        if (!TextUtils.isEmpty(bookQuantityText)) {
+            try {
+                int bookQuantityInt = Integer.parseInt(bookQuantityText.trim());
+                values.put(BookEntry.COLUMN_QUANTITY, bookQuantityInt);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, getString(R.string.no_valid_quantity),
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
 
         // if a new book should be added
         if (mBookUri == null) {
@@ -344,33 +371,32 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        try {
-            // Figure out the index of each column
-            int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
-            int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
-            int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
-            int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
-            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
 
-            //Move cursor form start position -1 to position 0
-            cursor.moveToNext();
+        if (cursor == null || !cursor.moveToFirst())
+            return;
 
-            //Read out the values from the cursor
-            String bookName = cursor.getString(nameColumnIndex);
-            float bookPrice = cursor.getFloat(priceColumnIndex);
-            int bookQuantity = cursor.getInt(quantityColumnIndex);
-            String supplierName = cursor.getString(supplierNameColumnIndex);
-            String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
+        // Figure out the index of each column
+        int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
+        int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
+        int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
+        int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
+        int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
 
-            bookNameEditText.setText(bookName);
-            bookPriceEditText.setText(String.format(Locale.getDefault(), "%.2f", bookPrice));
-            quantityEditText.setText(String.valueOf(bookQuantity));
-            supplierNameEditText.setText(supplierName);
-            supplierPhoneEditText.setText(supplierPhone);
 
-        } finally {
-            cursor.close();
-        }
+        //Read out the values from the cursor
+        String bookName = cursor.getString(nameColumnIndex);
+        float bookPrice = cursor.getFloat(priceColumnIndex);
+        int bookQuantity = cursor.getInt(quantityColumnIndex);
+        String supplierName = cursor.getString(supplierNameColumnIndex);
+        String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
+
+        bookNameEditText.setText(bookName);
+        bookPriceEditText.setText(String.format(Locale.getDefault(), "%.2f", bookPrice));
+        quantityEditText.setText(String.valueOf(bookQuantity));
+        supplierNameEditText.setText(supplierName);
+        supplierPhoneEditText.setText(supplierPhone);
+
+
     }
 
     @Override

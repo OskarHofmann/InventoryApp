@@ -12,7 +12,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,11 +32,16 @@ import butterknife.ButterKnife;
 public class DetailsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int BOOK_LOADER = 0;
-    @BindView(R.id.details_book_name) TextView bookNameView;
-    @BindView(R.id.details_price) TextView bookPriceView;
-    @BindView(R.id.details_quantity) TextView quantityView;
-    @BindView(R.id.details_supplier_name) TextView supplierNameView;
-    @BindView(R.id.details_supplier_phone) TextView supplierPhoneView;
+    @BindView(R.id.details_book_name)
+    TextView bookNameView;
+    @BindView(R.id.details_price)
+    TextView bookPriceView;
+    @BindView(R.id.details_quantity)
+    TextView quantityView;
+    @BindView(R.id.details_supplier_name)
+    TextView supplierNameView;
+    @BindView(R.id.details_supplier_phone)
+    TextView supplierPhoneView;
     private Uri mBookUri;
     private int mCurrentQuantity = -1;
 
@@ -164,44 +171,39 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-        try {
-            // Figure out the index of each column
-            int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
-            int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
-            int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
-            int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
-            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
+        if (cursor == null || !cursor.moveToFirst())
+            return;
 
-            //Move cursor form start position -1 to position 0
-            cursor.moveToFirst();
+        // Figure out the index of each column
+        int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRODUCT_NAME);
+        int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_PRICE);
+        int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_QUANTITY);
+        int supplierNameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_NAME);
+        int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
 
-            //Read out the values from the cursor
-            String bookName = cursor.getString(nameColumnIndex);
-            float bookPrice = cursor.getFloat(priceColumnIndex);
-            int bookQuantity = cursor.getInt(quantityColumnIndex);
-            String supplierName = cursor.getString(supplierNameColumnIndex);
-            String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
+        //Read out the values from the cursor
+        String bookName = cursor.getString(nameColumnIndex);
+        float bookPrice = cursor.getFloat(priceColumnIndex);
+        int bookQuantity = cursor.getInt(quantityColumnIndex);
+        String supplierName = cursor.getString(supplierNameColumnIndex);
+        String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
-            mCurrentQuantity = bookQuantity;
+        mCurrentQuantity = bookQuantity;
 
-            //Get the format for the user's local currency
-            NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        //Get the format for the user's local currency
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
 
-            bookNameView.setText(bookName);
-            bookPriceView.setText(currencyFormatter.format(bookPrice));
-            quantityView.setText(String.valueOf(bookQuantity));
-            supplierNameView.setText(supplierName);
-            supplierPhoneView.setText(supplierPhone);
+        bookNameView.setText(bookName);
+        bookPriceView.setText(currencyFormatter.format(bookPrice));
+        quantityView.setText(String.valueOf(bookQuantity));
+        supplierNameView.setText(supplierName);
+        supplierPhoneView.setText(supplierPhone);
 
-            //make a click on a valid phone number open a phone app
-            Linkify.addLinks(supplierPhoneView, Linkify.PHONE_NUMBERS);
-        } catch (Exception e) {
-            cursor.close();
-        }
+        //make a click on a valid phone number open a phone app
+        Linkify.addLinks(supplierPhoneView, Patterns.PHONE, "tel:", Linkify.sPhoneNumberMatchFilter, Linkify.sPhoneNumberTransformFilter);
+        supplierPhoneView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        //do NOT close the cursor when there is no exception as when we edit a book
-        //and come back to the DetailsActivity, we need to read
-        //the updated cursor
+
     }
 
     @Override
