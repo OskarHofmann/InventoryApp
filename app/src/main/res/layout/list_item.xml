@@ -25,7 +25,7 @@
             android:id="@+id/book_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="0.25"
             android:fontFamily="sans-serif"
             android:gravity="right"
             android:textAppearance="?android:textAppearanceSmall"

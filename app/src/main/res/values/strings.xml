@@ -10,7 +10,7 @@
 
     <!-- message for an empty inventory -->
     <string name="empty_inventory">The inventory is empty...</string>
-    <string name="add_some_books">Get started by adding some books!</string>
+    <string name="add_some_books">Get started by clicking on the + sign \n or add some dummy data!</string>
 
     <!-- menu buttons [CHAR LIMIT=20]-->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
