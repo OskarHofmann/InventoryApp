@@ -1,5 +1,5 @@
 # InventoryApp
-Android App for keeping track of a stores book inventory
+Android App for keeping track of a store's book inventory
 
 The app allows to add books, including contact data for the supplier, and keeps track of the available quantity.
 The quantity can be reduced by 1 (if > 0) via the "Sale" Button next to each book.
